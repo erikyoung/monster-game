@@ -1,3 +1,6 @@
+
+
+
 /*
   Code modified from:
   http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
@@ -10,12 +13,18 @@ We also load all of our images.
 */
 
 
-
+let bgReady, heroReady, monsterReady;
+let bgImage, heroImage, monsterImage, newMonsterImage;
 let count;
 let canvas;
 let ctx;
-
+let imgArray = [monsterImage, newMonsterImage];
+let currentMonsterImage = imgArray[Math.round(Math.random() *2)];
 let monstersCaught = 0; 
+
+
+
+
 
 
 canvas = document.createElement("canvas");
@@ -29,9 +38,16 @@ document.body.appendChild(canvas);
 //declared all the variables
 
 
-let bgReady, heroReady, monsterReady;
-let bgImage, heroImage, monsterImage;
 
+
+
+
+
+
+
+
+
+// var randomItem = imgArray[Math.floor(Math.random()*imgArray.length)];
 
 
 function loadImages() {
@@ -51,10 +67,13 @@ function loadImages() {
   monsterImage = new Image();
   monsterImage.onload = function () {
     // show the monster image
-    monsterReady = true;
+    monsterReady = true;  
   };
-  monsterImage.src = "images/Default.png";
+   monsterImage.src = "images/Default.png"; 
+
 }
+
+
 
 /** 
  * Setting up our characters.
@@ -74,13 +93,16 @@ let heroY = canvas.height / 2;
 let monsterX = (Math.random() * (canvas.width - 50));
 let monsterY = (Math.random() * (canvas.height - 50));
 
+
+
+
     
 
 count = 10; 
    // how many seconds the game lasts for - default 30
   var finished = false;
   var counter = function(){
-  count=count-1; // countown by 1 every second
+  count= count-1; // countown by 1 every second
   // when count reaches 0 clear the timer, hide monster and
   // hero and finish the game
     if (count <= 0)
@@ -89,9 +111,12 @@ count = 10;
        clearInterval(counter);
        // set game to finished
        finished = true;
-       count=0; 
-
-       
+       count= 0; 
+      monstersCaught = 0; 
+      document.getElementById('you-lose-game').innerHTML = "You Lose!";
+      heroReady = false; 
+      monsterReady = false; 
+      
     }
 }
 // timer interval is every second (1000ms)
@@ -123,7 +148,6 @@ function setupKeyboardListeners() {
 
 
 
-
 /**
  *  Update game objects - change player position based on key pressed
  *  and check to see if the monster has been caught!
@@ -144,6 +168,8 @@ let update = function () {
     heroX += 5;
   }
 
+
+
   // Check if player and monster collided. Our images
   // are about 32 pixels big.
     heroX = Math.min(canvas.width - 25, heroX);
@@ -157,21 +183,16 @@ let update = function () {
     monsterY = Math.max(0, monsterY);
 
 
-  
-
-
-
-
-
   //get a random relocation
   //monster spawns at a random location
 
 function checkWin() {
-  if (monstersCaught == 10 ) {
+  if (monstersCaught == 10 && finished == false) {
     alert("You win!"); 
   } 
    
 }
+
 
   if (
     heroX <= (monsterX + 32)
@@ -186,6 +207,7 @@ function checkWin() {
     // Note: Change this to place the monster at a new, random location.
     monsterX = (Math.random() * (canvas.width - 50));
     monsterY = (Math.random() * (canvas.width - 50));
+    currentMonsterImage = imgArray[Math.round(Math.random() *2)];
   }
 };
 
@@ -206,9 +228,6 @@ var render = function () {
   ctx.fillText("Time: " + count, 20, 50);
   // Display game over message when timer finished
 
-  if(finished==true){
-    ctx.fillText("Game over!", 200, 220);
-  }
   
 };
 
