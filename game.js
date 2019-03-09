@@ -37,7 +37,12 @@ document.body.appendChild(canvas);
 
 //declared all the variables
 
+let newGame = document.getElementById('new-game'); 
 
+newGame.addEventListener('click', function() {
+  location.reload(); 
+
+}); 
 
 
 

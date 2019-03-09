@@ -10,12 +10,25 @@ body {
 }
 
 #you-lose-game {
-	font-size: 100px;
+
+
 	color: #FF69B4;
-	
 	position: absolute;
 	top: 50%;
 	left: 33%;
+}
+
+#new-game {
+	border-radius: 20px;
+	border:none;
+	height: 50px;
+	width: 200px;
+	font-family: 'Raleway';
+	
+	color: #FF69B4;
+	position: absolute;
+	top: 90%;
+	left: 30%;
 }
 
 @-webkit-keyframes AnimationName {
