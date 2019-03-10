@@ -13,7 +13,7 @@ We also load all of our images.
 */
 
 
-let bgReady, heroReady, monsterReady;
+let bgReady, heroReady, monsterReady, newMonsterReady;
 let bgImage, heroImage, monsterImage, newMonsterImage;
 let count;
 let canvas;
@@ -41,9 +41,7 @@ let newGame = document.getElementById('new-game');
 
 newGame.addEventListener('click', function() {
   location.reload(); 
-
 }); 
-
 
 
 
@@ -56,6 +54,8 @@ newGame.addEventListener('click', function() {
 
 
 function loadImages() {
+
+
   bgImage = new Image();
   bgImage.onload = function () {
     // show the background image
@@ -75,6 +75,17 @@ function loadImages() {
     monsterReady = true;  
   };
    monsterImage.src = "images/Default.png"; 
+
+  newMonsterImage = new Image();
+
+  newMonsterImage.onload = function() {
+
+    newMonsterReady = true; 
+  }; 
+
+  newMonsterImage.src = "images/blue-monster.png"; 
+
+
 
 }
 
@@ -212,7 +223,7 @@ function checkWin() {
     // Note: Change this to place the monster at a new, random location.
     monsterX = (Math.random() * (canvas.width - 50));
     monsterY = (Math.random() * (canvas.width - 50));
-    currentMonsterImage = imgArray[Math.round(Math.random() *2)];
+    
   }
 };
 
@@ -228,7 +239,9 @@ var render = function () {
   }
   if (monsterReady) {
     ctx.drawImage(monsterImage, monsterX, monsterY);
+
   }
+  
 
   ctx.fillText("Time: " + count, 20, 50);
   // Display game over message when timer finished

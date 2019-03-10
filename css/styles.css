@@ -9,13 +9,23 @@ body {
 
 }
 
+.hello {
+	text-align: center;
+}
+
+img {
+	position: absolute;
+	top: 30%;
+	left: 30%;
+}
+
 #you-lose-game {
 
-
+	font-size: 70px;
 	color: #FF69B4;
 	position: absolute;
 	top: 50%;
-	left: 33%;
+	left: 40%;
 }
 
 #new-game {
